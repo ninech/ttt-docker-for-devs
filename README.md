@@ -1,24 +1,33 @@
-# README
+# Nine Tech Talk Thursday - Docker for Developers
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## What is this project?
 
-Things you may want to cover:
+This project is a sample rails app that has been dockerized with docker and docker-compose.
 
-* Ruby version
+## Interesting files
 
-* System dependencies
+```shell
+config/database.yml # Database configuration for the Rails application
+.env                # Environment variables (fed to the "app" container in docker-compose.yml)
+Dockerfile          # File to create the docker image for our rails application
+docker-compose.yml  # Used to launch our application with its dependencies (a postgres database) with one command.
+```
 
-* Configuration
+## Interesting commands
 
-* Database creation
+```shell
+docker build -t 'ttt/my-docker-image' . # Building the docker image for the application
+docker-compose build                    # Building all of the images that need to be built inside the docker-compose.yml
+docker-compose up app                   # Launch the service "app", along with all of its dependent services
+```
 
-* Database initialization
+## TL;DR
 
-* How to run the test suite
+```shell
+docker-compose build
+docker-compose up app
 
-* Services (job queues, cache servers, search engines, etc.)
+docker-compose run app rails db:setup # Creates the database, run the seeds, etc. Would normally be part of the container booting process.
 
-* Deployment instructions
-
-* ...
+# Go to http://localhost:4000
+```
