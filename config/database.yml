@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  host: <%= ENV.fetch("POSTGRES_HOST") { 'postgres' } %>
+  username: <%= ENV.fetch('POSTGRES_USER') { 'postgres' } %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: status_development
+
+test:
+  <<: *default
+  database: status_test
